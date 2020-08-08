@@ -58,7 +58,7 @@
 グローバル関数 Global Function
 ・作るな
 ・使いたければ名前空間で囲む
-	namespace Unichi {
+	namespace Unchi {
 
 		Function();
 	}
