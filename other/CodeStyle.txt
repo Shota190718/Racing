@@ -33,16 +33,11 @@
 ・全文字大文字				const int NUMBER = 0;
 ・単語区切りをアンダーバー	const int ARRAY_AMOUNT = 10;
 
-ローカル変数 Local Constant
+ローカル定数 Local Constant
 ・特になし
 
-グローバル変数 Global Constant
-・作るな
-・使いたければ名前空間で囲む
-	namespace Unichi {
-
-		const std::string UNCHI_KONG = "ウ　ン　チ　ー　コ　ン　グ";
-	}
+グローバル定数 Global Constant
+・非推奨
 
 関数共通 Function
 ・頭文字大文字			Function()
