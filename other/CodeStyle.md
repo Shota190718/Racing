@@ -13,7 +13,7 @@
 ・前方宣言をできるだけ用いる　　
 
 ## 変数共通 Variable
-・頭文字小文字  int variable;  ・単語区切りを大文字  int nomalVariable;  ・ポインタ型変数は先頭にp  int* pNumber;  ・静的変数もそれに順ずる　　
+・頭文字小文字<br>int variable;<br>・単語区切りを大文字<br>int nomalVariable;<br>・ポインタ型変数は先頭にp<br>int* pNumber;<br>・静的変数もそれに順ずる<br>　
 
 ## ローカル変数 Local Variable
 ・特になし　　
