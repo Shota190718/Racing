@@ -13,14 +13,24 @@
 ・前方宣言をできるだけ用いる　　
 
 ## 変数共通 Variable
-・頭文字小文字<br>int variable;<br>・単語区切りを大文字<br>int nomalVariable;<br>・ポインタ型変数は先頭にp<br>int* pNumber;<br>・静的変数もそれに順ずる<br>　
+・頭文字小文字
+
+	int variable;
+・単語区切りを大文字
+
+	int nomalVariable;
+・ポインタ型変数は先頭にp
+
+	int* pNumber;
+・静的変数もそれに順ずる　
 
 ## ローカル変数 Local Variable
 ・特になし　　
 
 ## グローバル変数 Global Variable
 ・作るな　　
-・使いたければ名前空間で囲む　　
+・使いたければ名前空間で囲む
+
 	namespace Unichi {
 
 		int UnchiKong;
