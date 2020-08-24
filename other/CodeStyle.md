@@ -1,27 +1,27 @@
-#コーディング規約
+# コーディング規約
 
-##とっても大事なこと
+## とっても大事なこと
 ・誰が見ても何をしているかわかるようなコーディングを心がけましょう
 
-##ソースファイル
+## ソースファイル
 ・ファイル名はクラス名、名前空間名などと一致させる
 
-##ヘッダファイル
+## ヘッダファイル
 ・ファイル名はクラス名、名前空間名などと一致させる
 ・uing namespaceを使わない
 ・インクルードをできるだけ行わない
 ・前方宣言をできるだけ用いる
 
-##変数共通 Variable
+## 変数共通 Variable
 ・頭文字小文字				int variable;
 ・単語区切りを大文字		int nomalVariable;
 ・ポインタ型変数は先頭にp	int* pNumber;
 ・静的変数もそれに順ずる
 
-##ローカル変数 Local Variable
+## ローカル変数 Local Variable
 ・特になし
 
-##グローバル変数 Global Variable
+## グローバル変数 Global Variable
 ・作るな
 ・使いたければ名前空間で囲む
 	namespace Unichi {
@@ -29,17 +29,17 @@
 		int UnchiKong;
 	}
 
-##定数共通 Constant
+## 定数共通 Constant
 ・全文字大文字				const int NUMBER = 0;
 ・単語区切りをアンダーバー	const int ARRAY_AMOUNT = 10;
 
-##ローカル定数 Local Constant
+## ローカル定数 Local Constant
 ・特になし
 
-##グローバル定数 Global Constant
+## グローバル定数 Global Constant
 ・非推奨
 
-##関数共通 Function
+## 関数共通 Function
 ・頭文字大文字			Function()
 ・単語区切り大文字		NormalFunction()
 ・基本動詞から始める	SpreadUnchi()
@@ -50,7 +50,7 @@
 		/*  何らかの処理　*/
 	}
 
-##グローバル関数 Global Function
+## グローバル関数 Global Function
 ・作るな
 ・使いたければ名前空間で囲む
 	namespace Unchi {
@@ -58,14 +58,14 @@
 		Function();
 	}
 
-##仮引数 Parameter
+## 仮引数 Parameter
 ・命名は変数共通と同じ
 ・基本型以外の型には参照(&)を用いる		Function(string& name)
 ・基本型以外の型でデータの書き換えを行わない場合constをつける
 　この時定数の命名規則にのっとる必要はない
 	Function(const string& fileName)
 
-##構造体、共用体 Struct, Union
+## 構造体、共用体 Struct, Union
 ・構造体、共用体名は頭文字小文字
 ・メンバは変数共通に順ずる
 	Struct MyStruct {
@@ -74,7 +74,7 @@
 		int y;
 	};
 
-##列挙型 Enum
+## 列挙型 Enum
 ・列挙型名は全文字大文字、文字区切りをアンダーバー
 ・メンバも上記と同様
 ・メンバの最後には〇〇_MAXをつける
@@ -84,14 +84,14 @@
 		ENUM_MAX
 	};
 
-##名前空間 Namespace
+## 名前空間 Namespace
 ・頭文字大文字
 ・単語区切り大文字
 ・変数宣言はヘッダファイルで行わない
 ・変数を外部呼出しする必要な場合はexternを用いる
 ・グローバルな変数、関数を包む
 
-##クラス Class
+## クラス Class
 ・基本1クラス1ヘッダ1ソース
 ・private修飾子は明示的に記述する
 ・記述順は変数、コンストラクタ、デストラクタ、関数、オペレータ
