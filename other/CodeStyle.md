@@ -60,7 +60,7 @@
 ・基本動詞から始める	
 
 	SpreadUnchi()　　
-・開き波かっこは関数宣言の最後の行に書く　<br>　
+・開き波かっこは関数宣言の最後の行に書く　<br>
 ・関数宣言後は一行開ける　　
 
 	Function() {
@@ -78,17 +78,17 @@
 	}
 
 ## 仮引数 Parameter
-・命名は変数共通と同じ　<br>　
+・命名は変数共通と同じ　<br>
 ・基本型以外の型には参照(&)を用いる
 
 	Function(string& name)　　
-・基本型以外の型でデータの書き換えを行わない場合constをつける　<br>　
+・基本型以外の型でデータの書き換えを行わない場合constをつける　<br>
 　この時定数の命名規則にのっとる必要はない　　
  
 	Function(const string& fileName)
 
 ## 構造体、共用体 Struct, Union
-・構造体、共用体名は頭文字小文字　　<br>
+・構造体、共用体名は頭文字大文字　　<br>
 ・メンバは変数共通に順ずる　　<br>
 
 	Struct MyStruct {
@@ -119,7 +119,7 @@
 ・基本1クラス1ヘッダ1ソース　　<br>
 ・private修飾子は明示的に記述する　　<br>
 ・記述順は変数、コンストラクタ、デストラクタ、関数、オペレータ　　<br>
-・アクセス修飾子での記述順はpublic, protected, private　　<br>
+・アクセス修飾子での記述順は関数はpublic, protected, private、変数は逆になる　　<br>
 ・private, protectedな変数にはアンダーバーをつける　　<br>
 ・メンバ変数を書き換えない関数はconstをつける　　<br>
 ・アクセス関数などの１文の関数はヘッダにインライン関数として記述　　<br>
@@ -188,3 +188,18 @@
 	
 		virtual void Netagire() override {}
 	}
+# if文
+・ブロックの開きはifと同じ行に書く<br>
+・if,elseの後の処理が1文の場合同一行に書く<br>
+・else,else ifは改行してから記述<br>
+
+	if(bool) {
+	
+		//何らかの処理
+	}
+	else {
+	
+		//何らかの処理
+	}
+	
+	if(bool) return;
