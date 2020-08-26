@@ -14,14 +14,17 @@
 
 ## 変数共通 Variable
 ・頭文字小文字
-
-	int variable;
+```cpp
+int variable;
+```
 ・単語区切りを大文字
-
-	int nomalVariable;
+```cpp
+int nomalVariable;
+```
 ・ポインタ型変数は先頭にp
-
-	int* pNumber;
+```cpp
+int* pNumber;
+```
 ・静的変数もそれに順ずる　
 
 ## ローカル変数 Local Variable
@@ -30,20 +33,21 @@
 ## グローバル変数 Global Variable
 ・作るな<br>
 ・使いたければ名前空間で囲む
+```cpp
+namespace Unichi {
 
-	namespace Unichi {
-
-		int UnchiKong;
-	}　　
-
+	int UnchiKong;
+}　　
+```
 ## 定数共通 Constant
 ・全文字大文字
-
-	const int NUMBER = 0;　　
+```cpp
+const int NUMBER = 0;　
+```
 ・単語区切りをアンダーバー
-
-	const int ARRAY_AMOUNT = 10;　　
-
+```cpp
+const int ARRAY_AMOUNT = 10;　　
+```
 ## ローカル定数 Local Constant
 ・特になし　　
 
@@ -52,62 +56,65 @@
 
 ## 関数共通 Function
 ・頭文字大文字			
-
-	Function()　　
+```cpp
+Function()　　
+```
 ・単語区切り大文字		
-
-	NormalFunction()　　
+```cpp
+NormalFunction()　
+```
 ・基本動詞から始める	
-
-	SpreadUnchi()　　
+```cpp
+SpreadUnchi()　
+```
 ・開き波かっこは関数宣言の最後の行に書く　<br>
 ・関数宣言後は一行開ける　　
+```cpp
+Function() {
 
-	Function() {
-
-		/*  何らかの処理　*/
-	}
-
+	/*  何らかの処理　*/
+}
+```
 ## グローバル関数 Global Function
 ・作るな　　<br>
 ・使いたければ名前空間で囲む　　
+```cpp
+namespace Unchi {
 
-	namespace Unchi {
-
-		Function();
-	}
-
+	Function();
+}
+```
 ## 仮引数 Parameter
 ・命名は変数共通と同じ　<br>
 ・基本型以外の型には参照(&)を用いる
-
-	Function(string& name)　　
+```cpp
+Function(string& name)　
+```
 ・基本型以外の型でデータの書き換えを行わない場合constをつける　<br>
 　この時定数の命名規則にのっとる必要はない　　
- 
-	Function(const string& fileName)
-
+ ```cpp
+Function(const string& fileName)
+```
 ## 構造体、共用体 Struct, Union
 ・構造体、共用体名は頭文字大文字　　<br>
 ・メンバは変数共通に順ずる　　<br>
-
-	Struct MyStruct {
-
-		int x;
-		int y;
-	};
-
+```cpp
+Struct MyStruct {
+	int x;
+	int y;
+};
+```
 ## 列挙型 Enum
 ・列挙型名は全文字大文字、文字区切りをアンダーバー　　<br>
 ・メンバも上記と同様　　<br>
 ・メンバの最後には〇〇_MAXをつける　　
-
-	Enum MY_ENUM {
-		ENUM_ONE,
-		ENUM_TWO,
-		ENUM_MAX
-	};
-
+```cpp
+Enum MY_ENUM {
+	ENUM_ONE,
+	ENUM_TWO,
+	ENUM_MAX
+};
+```
 ## 名前空間 Namespace
 ・頭文字大文字　　<br>
 ・単語区切り大文字　　<br>
@@ -126,80 +133,136 @@
 ・継承元のクラスのデストラクタは絶対仮想デストラクタにする　　<br>
 ・クラス継承で関数のオーバーライドを行う場合overrideをつける　　<br>
 ・コンストラクタでメンバを初期化する場合以下のように記述　　
+```cpp
+Construct()
+	: publicMember(0)
+	, privateMember_(124) {
 
-	Construct()
-		: publicMember(0)
-		, privateMember_(124) {
-
-	}
+}
+```
 ・少なくともpublicなメンバにはコメントを記述する　　<br>
 //// MyClass.h ////　
+```cpp
+#include <string>
 
-	#include <string>
+class MyClass {
 
-	class MyClass {
-	
-	public:
-		float x;
+private:
+	std::string name_;
 
-	protected:
-		int* pNumber_;
+protected:
+	int* pNumber_;
 
-	private:
-		std::string name_;
+public:
+	float x;
 
-	public:
-		MyClass();
-		virtual ~MyClass();
+public:
+	MyClass();
+	virtual ~MyClass();
 
-	public:
-		void SetName(std::string& name) { name_ = name; }
+public:
+	void SetName(std::string& name) { name_ = name; }
 
-	protected:
-		bool HasNumber() const { return pNumber_ != nullptr; }
+protected:
+	bool HasNumber() const { return pNumber_ != nullptr; }
 
-	private:
-		virtual void Netagire();
-	}
-
+private:
+	virtual void Netagire();
+};
+```
 //// MyClass.cpp ////　　
+```cpp
+#include "MyClass.h"
 
-	#include "MyClass.h"
+MyClass::MyClass()
+	: x(0.0)
+	, pNumber_(nullptr)
+	, name_("defalt") {
+}
 
-	MyClass::MyClass()
-		: x(0.0)
-		, pNumber_(nullptr)
-		, name_("defalt") {
-	}
+MyClass::~MyClass() {
 
-	MyClass::~MyClass() {
+	if (HasNumber()) delete pNumber_;
+}
 
-		if (HasNumber()) delete pNumber_;
-	}
-
-	void MyClass::Netagire() {
-	}
-
+void MyClass::Netagire() {
+}
+```
 //// MyExtend.h ////　　
-
-	#include "MyClass.h"
-
-	class MyExtend : public MyClass {
+```cpp
+#include "MyClass.h"
 	
-		virtual void Netagire() override {}
-	}
-# if文
+class MyExtend : public MyClass {
+
+	virtual void Netagire() override {}
+};
+```
+## if文
 ・ブロックの開きはifと同じ行に書く<br>
 ・if,elseの後の処理が1文の場合同一行に書く<br>
 ・else,else ifは改行してから記述<br>
+```cpp
+if(bool) {
 
-	if(bool) {
+	//何らかの処理
+}
+else {
+
+	//何らかの処理
+}
+
+if(bool) return;
+```
+## switch文
+・ブロックの開きとswitchは同じ行に書く<br>
+・caseの中が複数の文で構成されていても{}でかこう必要はない<br>
+・caseの中が長い文や複数の文で構成されていている場合は改行してもよい<br>
+・caseの値はできるだけenumの値を用いる<br>
+・エラー対策のためdefaultは必ずつける
+```cpp
+switch(value) {
+
+case VALUE_ONE:	func();	break;
+case VALUE_TWO:
+	func();
+	func0();
+	break;
+default:	break;
+}
+```
+## while文
+・ブロックの開きとwhileは同じ行に書く<br>
+・無限ループはwhile(true)で統一<br>
+```cpp
+while(bool) {
+
+	//なんらかの処理	
+}
+```
+## do文
+・ブロックの開きとdoは同じ行に書く<br>
+・ブロックの閉じとwhileは同じ行に書く<br>
+```cpp
+do {
+
+	//何らかの処理
+} whille(bool);
+```
+## for文
+・ブロックの開きとforは同じ行に書く<br>
+・内部の変数はどの範囲を回したいかわかりやすい変数名にする<br>
+・多重で間に文を挟まない場合for同士の間に空行を用いない<br>
+```cpp
+for (int i = 0; i < 10; ++i) {
+	
+	//何らかの処理
+}
+for (int x = 0; x < 5; ++x) {
+	for (int y = 0; y < 5; ++y) {
 	
 		//何らかの処理
 	}
-	else {
-	
-		//何らかの処理
-	}
-	
-	if(bool) return;
+}
+```
+## goto文
+・知らない子ですね<br>
