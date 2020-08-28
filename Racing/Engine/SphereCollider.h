@@ -5,8 +5,8 @@
 //-----------------------------------------------------------
 //球体の当たり判定
 //-----------------------------------------------------------
-class SphereCollider : public Collider
-{
+class SphereCollider : public Collider {
+
 	//Colliderクラスのprivateメンバにアクセスできるようにする
 	friend class Collider;
 

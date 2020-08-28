@@ -5,8 +5,8 @@
 //-----------------------------------------------------------
 //箱型の当たり判定
 //-----------------------------------------------------------
-class BoxCollider :	public Collider
-{
+class BoxCollider :	public Collider {
+
 	//Colliderクラスのprivateメンバにアクセスできるようにする
 	friend class Collider;
 

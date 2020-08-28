@@ -10,8 +10,7 @@ class SphereCollider;
 
 
 //あたり判定のタイプ
-enum ColliderType
-{
+enum ColliderType {
 	COLLIDER_BOX,		//箱型
 	COLLIDER_CIRCLE		//球体
 };
@@ -19,8 +18,8 @@ enum ColliderType
 //-----------------------------------------------------------
 //あたり判定を管理するクラス
 //-----------------------------------------------------------
-class Collider
-{
+class Collider {
+
 	//それぞれのクラスのprivateメンバにアクセスできるようにする
 	friend class BoxCollider;
 	friend class SphereCollider;
