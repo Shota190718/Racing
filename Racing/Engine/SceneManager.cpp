@@ -1,6 +1,7 @@
 #include "sceneManager.h"
 
 #include "../TestScene.h"
+#include "../SampleScene.h"
 #include "Model.h"
 #include "Image.h"
 #include "Audio.h"
@@ -16,9 +17,9 @@ SceneManager::SceneManager(GameObject * parent)
 void SceneManager::Initialize()
 {
 	//最初のシーンを準備
-	currentSceneID_ = SCENE_ID_TEST;
+	currentSceneID_ = SCENE_ID_SAMPLE;
 	nextSceneID_ = currentSceneID_;
-	Instantiate<TestScene>(this);
+	Instantiate<SampleScene>(this);
 }
 
 //更新
@@ -38,8 +39,8 @@ void SceneManager::Update()
 		//次のシーンを作成
 		switch (nextSceneID_)
 		{
-		case SCENE_ID_TEST: Instantiate<TestScene>(this); break;
-
+		case SCENE_ID_TEST:		Instantiate<TestScene>(this); break;
+		case SCENE_ID_SAMPLE:	Instantiate<SampleScene>(this); break;
 		}
 
 		currentSceneID_ = nextSceneID_;

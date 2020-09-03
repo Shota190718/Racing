@@ -1,6 +1,7 @@
 #include "gameObject.h"
 #include <assert.h>
-#include "global.h"
+#include "Global.h"
+#include "Direct3D.h"
 
 //コンストラクタ（親も名前もなし）
 GameObject::GameObject(void) :
@@ -29,6 +30,7 @@ GameObject::GameObject(GameObject * parent, const std::string& name)
 	if(parent)
 		transform_.pParent_ = &parent->transform_;
 
+	drawViewPortList_.emplace(Direct3D::VIEW_PORT_FULL);
 }
 
 //デストラクタ
@@ -311,23 +313,31 @@ void GameObject::UpdateSub()
 
 void GameObject::DrawSub()
 {
-	Draw();
+	auto currentVP = Direct3D::GetCurrentViewPort();
+	
+	for (auto&& vp : drawViewPortList_) {
+
+		if (currentVP != vp)	Direct3D::SetViewPortType(vp);
+		
+		Draw();
 
 
-	//リリース時は削除
+		//リリース時は削除
 #ifdef _DEBUG
 		//コリジョンの描画
-	if (Direct3D::isDrawCollision_)
-	{
-		CollisionDraw();
-	}
+		if (Direct3D::isDrawCollision_) {
+			
+			CollisionDraw();
+		}
 #endif
 
-	//その子オブジェクトの描画処理
-	for (auto it = childList_.begin(); it != childList_.end(); it++)
-	{
-		(*it)->DrawSub();
+		//その子オブジェクトの描画処理
+		for (auto it = childList_.begin(); it != childList_.end(); it++) {
+			
+			(*it)->DrawSub();
+		}
 	}
+	Direct3D::SetViewPortType(currentVP);
 }
 
 void GameObject::ReleaseSub()
@@ -361,4 +371,12 @@ XMMATRIX GameObject::GetWorldMatrix(void)
 	return transform_.GetWorldMatrix();
 }
 
+void GameObject::AddDrawViewPort(Direct3D::VIEW_PORT_TYPE type) {
 
+	drawViewPortList_.emplace(type);
+}
+
+void GameObject::ResetDrawViewPortList() {
+
+	drawViewPortList_.clear();
+}

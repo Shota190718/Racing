@@ -17,6 +17,14 @@ using namespace DirectX;
 //-----------------------------------------------------------
 namespace Direct3D
 {
+	//3タイプ（全画面、左半分、右半分）
+	enum VIEW_PORT_TYPE {
+		VIEW_PORT_FULL,
+		VIEW_PORT_LEFT,
+		VIEW_PORT_RIGHT,
+		VIEW_PORT_MAX
+	};
+	
 	////////////////////////外部からもアクセスする変数群///////////////////////////////
 	//【デバイス】
 	//描画を行うための環境やリソースの作成に使う
@@ -98,5 +106,12 @@ namespace Direct3D
 	//Zバッファへの書き込みON/OFF
 	//引数：isWrite	  true=書き込みON／false=書き込みOFF
 	void SetDepthBafferWriteEnable(bool isWrite);
+
+	//描画範囲の設定
+	//引数：列挙型VIEW_PORT_TYPE
+	void SetViewPortType(VIEW_PORT_TYPE type);
+
+	//現在のビューポートのタイプ
+	VIEW_PORT_TYPE GetCurrentViewPort();
 };
 

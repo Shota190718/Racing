@@ -1,4 +1,5 @@
 #include <d3dcompiler.h>
+#include <array>
 #include "Direct3D.h"
 #include "Global.h"
 #include "Transform.h"
@@ -40,8 +41,11 @@ namespace Direct3D
 	SHADER_BUNDLE			shaderBundle[SHADER_MAX] = { 0 };
 	int						screenWidth_ = 0;
 	int						screenHeight_ = 0;
-
-
+	
+	//ビューポート
+	//レンダリング結果を表示する範囲
+	std::array<D3D11_VIEWPORT, VIEW_PORT_MAX> viewPorts;
+	VIEW_PORT_TYPE			currentViewPort;
 
 	//初期化処理
 	HRESULT Direct3D::Initialize(HWND hWnd, int screenWidth, int screenHeight)
@@ -118,13 +122,30 @@ namespace Direct3D
 
 		// ビューポートの設定
 		//レンダリング結果を表示する範囲
-		D3D11_VIEWPORT vp;
-		vp.Width = (float)screenWidth;			//幅
-		vp.Height = (float)screenHeight;		//高さ
-		vp.MinDepth = 0.0f;		//手前
-		vp.MaxDepth = 1.0f;		//奥
-		vp.TopLeftX = 0;		//左
-		vp.TopLeftY = 0;		//上
+		viewPorts[VIEW_PORT_FULL] = {
+			0.f,
+			0.f,
+			(FLOAT)screenWidth,
+			(FLOAT)screenHeight,
+			0.f,
+			1.f
+		};
+		viewPorts[VIEW_PORT_LEFT] = {
+			0.f,
+			0.f,
+			((FLOAT)screenWidth) / 2,
+			(FLOAT)screenHeight,
+			0.f,
+			1.f
+		};
+		viewPorts[VIEW_PORT_RIGHT] = {
+			((FLOAT)screenWidth) / 2,
+			0.f,
+			((FLOAT)screenWidth) / 2.f,
+			(FLOAT)screenHeight,
+			0.f,
+			1.f
+		};
 
 
 		//各パターンのシェーダーセット準備
@@ -171,8 +192,8 @@ namespace Direct3D
 		//データを画面に描画するための一通りの設定
 		pContext_->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);  // データの入力種類を指定
 		pContext_->OMSetRenderTargets(1, &pRenderTargetView_, pDepthStencilView);            // 描画先を設定（今後はレンダーターゲットビューを介して描画してね）
-		pContext_->RSSetViewports(1, &vp);                                      // ビューポートのセット
-
+		pContext_->RSSetViewports(1, &viewPorts[VIEW_PORT_FULL]);                                      // ビューポートのセット
+		currentViewPort = VIEW_PORT_FULL;
 
 
 
@@ -436,4 +457,16 @@ namespace Direct3D
 		}
 	}
 
+	//描画範囲の設定
+	void SetViewPortType(VIEW_PORT_TYPE type) {
+
+		pContext_->RSSetViewports(1, &viewPorts[type]);
+		currentViewPort = type;
+	}
+
+	//現在のビューポートのタイプ
+	VIEW_PORT_TYPE GetCurrentViewPort() {
+
+		return currentViewPort;
+	}
 }

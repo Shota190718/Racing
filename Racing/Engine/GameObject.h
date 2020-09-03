@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include <list>
+#include <set>
 #include <string>
 #include <assert.h>
 #include "SphereCollider.h"
@@ -12,6 +13,9 @@
 
 using namespace DirectX;
 
+namespace Direct3D {
+	enum VIEW_PORT_TYPE;
+}
 
 //-----------------------------------------------------------
 //全てのゲームオブジェクト（シーンも含めて）が継承するインターフェース
@@ -30,7 +34,7 @@ protected:
 
 	//衝突判定リスト
 	std::list<Collider*>	colliderList_;	
-
+	
 public:
 	//コンストラクタ
 	GameObject();
@@ -166,6 +170,16 @@ private:
 
 	//子オブジェクトリスト
 	std::list<GameObject*> childList_;
+
+	//描画する範囲のリスト
+	std::set<Direct3D::VIEW_PORT_TYPE> drawViewPortList_;
+
+protected:
+	//描画するビューポートを追加する
+	void AddDrawViewPort(Direct3D::VIEW_PORT_TYPE type);
+
+	//描画するビューポートをリセットする
+	void ResetDrawViewPortList();
 };
 
 
